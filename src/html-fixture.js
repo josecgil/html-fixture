@@ -1,3 +1,5 @@
+"use strict";
+
 export default class HtmlFixture {
     constructor() {
         this.root=null;
@@ -32,7 +34,7 @@ export default class HtmlFixture {
         return false;
     }
 
-    getRootElement() {
+    getRootDOMElement() {
         return this.root;
     }
 
@@ -115,6 +117,4 @@ export default class HtmlFixture {
     asString() {
         return this._normalizeHtml(this.root.innerHTML);
     }
-}
-
-exports.HtmlFixture=HtmlFixture;
+};

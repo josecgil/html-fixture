@@ -19,7 +19,7 @@ afterEach(() => {
 
 test("should not create html on new instance", () => {
     const newFixtureInstance=new HtmlFixture();
-    const root=newFixtureInstance.getRootElement();
+    const root=newFixtureInstance.getRootDOMElement();
     expect(root).toBe(null);
 });
 
@@ -51,9 +51,9 @@ test("should be empty if content is void", () => {
 test("should destroy fixture elements on destroy() call", () => {
     const newFixtureInstance=new HtmlFixture();
     newFixtureInstance.create();
-    const fixtureId=newFixtureInstance.getRootElement().getAttribute("id");
+    const fixtureId=newFixtureInstance.getRootDOMElement().getAttribute("id");
     newFixtureInstance.destroy();
-    let root=newFixtureInstance.getRootElement();
+    let root=newFixtureInstance.getRootDOMElement();
     expect(root).toBe(null);
     root=document.getElementById(fixtureId);
     expect(root).toBe(null);
@@ -62,7 +62,7 @@ test("should destroy fixture elements on destroy() call", () => {
 test("should create an empty root element at the end of body when create() is called", () => {
     const newFixtureInstance=new HtmlFixture();
     newFixtureInstance.create();
-    const root=newFixtureInstance.getRootElement();
+    const root=newFixtureInstance.getRootDOMElement();
     expect(root).not.toBeUndefined();
     expect(root).toBe(document.body.lastChild);
     expect(root.children.length).toBe(0);
@@ -73,7 +73,7 @@ test("should create an unique id on every create()", () => {
     for(let i=0; i<100; i++) {
         const fixture=new HtmlFixture();
         fixture.create();
-        const id=fixture.getRootElement().getAttribute("id");
+        const id=fixture.getRootDOMElement().getAttribute("id");
         expect(ids).not.toContain(id);
         ids.push(id);
         fixture.destroy();
@@ -83,9 +83,9 @@ test("should create an unique id on every create()", () => {
 test("should destroy old element if create() is called twice without destroy()", () => {
     const fixture=new HtmlFixture();
     fixture.create();
-    const oldId=fixture.getRootElement().getAttribute("id");
+    const oldId=fixture.getRootDOMElement().getAttribute("id");
     fixture.create();
-    const newId=fixture.getRootElement().getAttribute("id");
+    const newId=fixture.getRootDOMElement().getAttribute("id");
     expect(newId).not.toBe(oldId);
     const oldElement=document.getElementById(oldId);
     expect(oldElement).toBe(null);
@@ -93,20 +93,20 @@ test("should destroy old element if create() is called twice without destroy()",
 
 
 test("should create a root invisible element", () => {
-    const root=fixture.getRootElement();
+    const root=fixture.getRootDOMElement();
     expect(nodeIsVisible(root)).toBeFalsy();
 });
 
 test("should add simple html via string", () => {
     fixture.add("<p></p>");
-    const root=fixture.getRootElement();
+    const root=fixture.getRootDOMElement();
     expect(root.children.length).toBe(1);
     expect(root.firstChild.nodeName.toLowerCase()).toBe("p");
 });
 
 test("should add complex html via string", () => {
     fixture.add("<p><img/></p><div></div>");
-    const root=fixture.getRootElement();
+    const root=fixture.getRootDOMElement();
     expect(root.children.length).toBe(2);
     const pNode = root.children[0];
     const divNode = root.children[1];
@@ -119,7 +119,7 @@ test("should add complex html via string", () => {
 test("should add html to a fixture that has html", () => {
     fixture.add("<p></p>");
     fixture.add("<div></div>");
-    const root=fixture.getRootElement();
+    const root=fixture.getRootDOMElement();
     expect(root.children.length).toBe(2);
     const pNode = root.children[0];
     const divNode = root.children[1];
@@ -138,7 +138,7 @@ test("should add html to a fixture via multiline comment in fn", () => {
 
     fixture.add(initialHtml);
 
-    const root=fixture.getRootElement();
+    const root=fixture.getRootDOMElement();
     expect(root.children.length).toBe(2);
     const imgNode = root.children[0];
     const divNode = root.children[1];

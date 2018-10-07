@@ -6,7 +6,7 @@ module.exports = {
         main: './src/html-fixture.js'
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'lib'),
         filename: 'html-fixture.js'
     },
     module: {
