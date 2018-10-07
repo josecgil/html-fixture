@@ -1,6 +1,6 @@
 {
   "name": "html-fixture",
-  "version": "0.9.8",
+  "version": "0.9.10",
   "description": "A small JS library to create html test fixtures in an easy way",
   "main": "lib/html-fixture.js",
   "scripts": {
