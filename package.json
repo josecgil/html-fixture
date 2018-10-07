@@ -1,0 +1,24 @@
+{
+  "name": "html-fixture",
+  "version": "1.0.0",
+  "description": "A small JS library to create html test fixtures in an easy way",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josecgil/html-fixture.git"
+  },
+  "keywords": [
+    "html",
+    "fixture",
+    "testing"
+  ],
+  "author": "José Carlos Gil Zambrana <josecgil@gmail.com> (https://github.com/josecgil/html-fixture)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/josecgil/html-fixture/issues"
+  },
+  "homepage": "https://github.com/josecgil/html-fixture#readme"
+}
