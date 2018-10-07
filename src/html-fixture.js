@@ -116,3 +116,5 @@ export default class HtmlFixture {
         return this._normalizeHtml(this.root.innerHTML);
     }
 }
+
+exports.HtmlFixture=HtmlFixture;
