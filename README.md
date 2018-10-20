@@ -21,7 +21,7 @@ This package exposes a class to manipulate and query an htmlFixture, the intende
 
 All methods:
 
-```create()```
+*```create()```*
 
   Creates a div in DOM to hold all the rest of the html fixture (you append html with the ```append``` method)
   All the content in the fixture is always inside this DOM.
@@ -31,7 +31,7 @@ All methods:
   
   The div element created is invisible ("display:none") and contains an attribute id="html-fixture-"+GUID
 
-```destroy()```
+*```destroy()```*
 
   Removes the div in DOM inserted by ```create()```
   
@@ -65,13 +65,16 @@ All methods:
   ```
   This feature exists to simplify insertion of complex Html if you use Ecmascript 5
   
-```isEmpty()```
+*```isEmpty()```*
+
     returns true if the content of the fixture is empty
     
-```asString()```
+*```asString()```*
+
     returns the content of the fixture as a string (without the containing div, only the content that was added on ```append```)
 
-```isEqual(string|DOMElement|function)```
+*```isEqual(string|DOMElement|function)```*
+
      this method accepts the same types of param as ```append```.
      Compares the content of the fixture and the param and return true if it considers that are equal
      
@@ -114,7 +117,8 @@ All methods:
           
      ```
      
-```elementByTag(tagName)```
+*```elementByTag(tagName)```*
+
     returns the first element in the fixture that has the specified tag name
     
 ```
@@ -123,42 +127,39 @@ All methods:
     htmlFixture.elementByTag("p");// returns the DOMElement that refers to "<p>1</p>"
 ```
 
-```elementBySelector(selector)```
+*```elementBySelector(selector)```*
+
     returns the first element in the fixture that has matches the specified selector
     
     ```selector``` as per [w3c](https://www.w3.org/TR/selectors-3)
     
 ```
     const html="<p>1</p><a>2</a><p>3</p>";
-    fixture.append(html);
-    fixture.elementBySelector("p:first-child"); // returns the DOMElement that refers to "<p>1</p>"
+    htmlFixture.append(html);
+    htmlFixture.elementBySelector("p:first-child"); // returns the DOMElement that refers to "<p>1</p>"
 ```
 
-```elementsByTag(tagName) && elementsBySelector(selector)```
-Same as ``elementByTag(tagName)``` && ``elementBySelector(selector)``` but returns an array with all the elements in the fixture instead of only the first element.
+*```elementsByTag(tagName) && elementsBySelector(selector)```*
+
+Same as ```elementByTag(tagName)``` && ``elementBySelector(selector)``` but returns an array with all the elements in the fixture instead of only the first element.
 
 
-
-
-
-
-test("should query N DOM Elements by Tag", () => {
+Some examples:
+```
     const html="<p>1</p><a>2</a><p>3</p>";
     fixture.append(html);
     const elements = fixture.elementsByTag("p");
-    expect(elements.length).toBe(2);
-    expect(elements[0].outerHTML).toBe("<p>1</p>");
-    expect(elements[1].outerHTML).toBe("<p>3</p>");
-});
+    elements[0].outerHTML; // "<p>1</p>"
+    elements[1].outerHTML; // "<p>3</p>"
 
-test("should query N DOM Elements by selector", () => {
-    const html="<p>1</p><a>2</a><p>3</p>";
+
+    const html="<p class="title">1</p><a class="title">2</a><p>3</p>";
     fixture.append(html);
-    const elements = fixture.elementsBySelector("p");
-    expect(elements.length).toBe(2);
-    expect(elements[0].outerHTML).toBe("<p>1</p>");
-    expect(elements[1].outerHTML).toBe("<p>3</p>");
-});
+    const elements = fixture.elementsBySelector(".title");
+    elements[0].outerHTML; // "<p class="title">1</p>"
+    elements[1].outerHTML; // "<a class="title">2</a>"
+
+```
      
 
 

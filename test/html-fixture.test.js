@@ -254,11 +254,20 @@ test("should query N DOM Elements by Tag", () => {
     expect(elements[1].outerHTML).toBe("<p>3</p>");
 });
 
-test("should query N DOM Elements by selector", () => {
+test("should query N DOM Elements by tag selector", () => {
     const html="<p>1</p><a>2</a><p>3</p>";
     fixture.append(html);
     const elements = fixture.elementsBySelector("p");
     expect(elements.length).toBe(2);
     expect(elements[0].outerHTML).toBe("<p>1</p>");
     expect(elements[1].outerHTML).toBe("<p>3</p>");
+});
+
+test("should query N DOM Elements by class name selector", () => {
+    const html="<p class='title'>1</p><a class='title'>2</a><p>3</p>";
+    fixture.append(html);
+    const elements = fixture.elementsBySelector(".title");
+    expect(elements.length).toBe(2);
+    expect(elements[0].outerHTML).toBe("<p class=\"title\">1</p>");
+    expect(elements[1].outerHTML).toBe("<a class=\"title\">2</a>");
 });
