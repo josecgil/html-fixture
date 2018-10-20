@@ -1,18 +1,18 @@
 "use strict";
 
-export default class HtmlFixture {
+class HtmlFixture {
     constructor() {
-        this.root=null;
+        this._root=null;
     }
 
     create() {
-        if (this.root!=null) {
+        if (this._root!=null) {
             this.destroy();
         }
         const div = document.createElement("div");
         div.setAttribute("id",`html-fixture-${this._newGUID()}`);
         div.setAttribute("style","display:none");
-        this.root=document.body.appendChild(div);
+        this._root=document.body.appendChild(div);
     }
 
     _newGUID() {
@@ -24,18 +24,34 @@ export default class HtmlFixture {
     }
 
     destroy() {
-        this.root.parentNode.removeChild(this.root);
-        this.root=null;
+        this._root.parentNode.removeChild(this._root);
+        this._root=null;
     }
 
     isEmpty() {
-        if (this.root == null) return true;
-        if (this.root.innerHTML.trim().length===0) return true;
+        if (this._root == null) return true;
+        if (this._root.innerHTML.trim().length===0) return true;
         return false;
     }
 
-    getRootDOMElement() {
-        return this.root;
+    rootElement() {
+        return this._root;
+    }
+
+    elementByTag(tagName) {
+        return this._root.getElementsByTagName(tagName)[0];
+    }
+
+    elementBySelector(selector) {
+        return this._root.querySelector(selector);
+    }
+
+    elementsByTag(tagName) {
+        return this._root.getElementsByTagName(tagName);
+    }
+
+    elementsBySelector(selector) {
+        return this._root.querySelectorAll(selector);
     }
 
     _parseFunctionComment(fn) {
@@ -70,9 +86,9 @@ export default class HtmlFixture {
         return tmp.body.children;
     }
 
-    add(param) {
+    append(param) {
         const html=this._paramToString(param);
-        return this.root.innerHTML=this.root.innerHTML+html;
+        return this._root.innerHTML=this._root.innerHTML+html;
     }
 
     _replaceAll(str, search, replacement) {
@@ -108,13 +124,15 @@ export default class HtmlFixture {
     }
 
     isEqual(param) {
-        const myHtml=this._normalizeHtml(this.root.innerHTML);
+        const myHtml=this._normalizeHtml(this._root.innerHTML);
         let otherHtml=this._paramToString(param);
         otherHtml=this._normalizeHtml(otherHtml);
         return myHtml===otherHtml;
     }
 
     asString() {
-        return this._normalizeHtml(this.root.innerHTML);
+        return this._normalizeHtml(this._root.innerHTML);
     }
 };
+
+module.exports=HtmlFixture;

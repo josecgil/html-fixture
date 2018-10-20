@@ -1,10 +1,10 @@
 {
   "name": "html-fixture",
-  "version": "0.9.10",
+  "version": "0.9.13",
   "description": "A small JS library to create html test fixtures in an easy way",
   "main": "lib/html-fixture.js",
   "scripts": {
-    "npmpublish": "jest && webpack --mode production && npm publish",
+    "npmpublish": "jest && babel ./src -d ./lib && npm publish",
     "build": "babel ./src -d ./lib",
     "test": "jest"
   },
@@ -25,9 +25,7 @@
   "homepage": "https://github.com/josecgil/html-fixture#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0"
-  },
-  "dependencies": {
+    "babel-preset-env": "^1.7.0",
     "jest": "^23.6.0"
   }
 }
